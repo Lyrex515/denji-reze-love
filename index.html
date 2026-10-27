@@ -27,18 +27,18 @@ body {
 
 button { font: inherit; cursor: pointer; border: none; outline: none; }
 
-/* Fırtınalı və Yağışlı Arxa Fon */
+/* Anime Yağışlı və Fırtınalı Arxa Fon */
 #ambient {
   position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(85, 37, 95, 0.35), transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(45, 25, 65, 0.4), transparent 50%), #0b0710;
+  background: radial-gradient(circle at 20% 20%, rgba(85, 37, 95, 0.45), transparent 55%),
+              radial-gradient(circle at 80% 80%, rgba(35, 20, 55, 0.5), transparent 55%), #0b0710;
 }
 
 .rain { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .raindrop {
-  position: absolute; top: -40px; width: 1.5px; height: 45px;
-  background: linear-gradient(transparent, rgba(180, 160, 255, 0.45));
-  animation: rainfall 1s linear infinite; opacity: 0.7;
+  position: absolute; top: -40px; width: 1.5px; height: 50px;
+  background: linear-gradient(transparent, rgba(190, 170, 255, 0.6));
+  animation: rainfall 0.85s linear infinite; opacity: 0.75;
 }
 @keyframes rainfall {
   0% { transform: translateY(-40px); }
@@ -48,7 +48,7 @@ button { font: inherit; cursor: pointer; border: none; outline: none; }
 .topbar {
   position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between;
   padding: 22px clamp(20px, 5vw, 60px); border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px); background: rgba(11, 7, 16, 0.6);
+  backdrop-filter: blur(12px); background: rgba(11, 7, 16, 0.75);
 }
 .brand { letter-spacing: 0.25em; text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: #e7d8e8; }
 .brand span { color: var(--pink); }
@@ -96,18 +96,34 @@ h2 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05; margin-bottom: 18
 }
 .secondary:hover { background: rgba(255, 255, 255, 0.15); }
 
-/* Xüsusi Personaj Kartları */
-.char-container { display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; }
-.char-badge {
-  width: 100px; height: 110px; border-radius: 20px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 6px; backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: float 4s ease-in-out infinite;
+/* Animasiyalı Anime Xarakter Konteynerləri */
+.characters-stage {
+  display: flex; justify-content: center; align-items: flex-end; gap: 40px; height: 150px; margin-bottom: 20px;
 }
-.char-badge.denji { background: linear-gradient(145deg, rgba(255,133,179,0.15), rgba(40,20,35,0.8)); border: 1.5px solid var(--pink); }
-.char-badge.reze { background: linear-gradient(145deg, rgba(177,138,255,0.15), rgba(25,20,40,0.8)); border: 1.5px solid var(--purple); animation-delay: -2s; }
-.char-badge span { font-size: 2.2rem; }
-.char-badge small { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); font-weight: 700; }
-@keyframes float { 50% { transform: translateY(-10px); } }
+.anime-avatar {
+  width: 100px; height: 130px; position: relative; border-radius: 20px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  animation: floatAvatar 4s ease-in-out infinite;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+.anime-avatar.denji {
+  background: linear-gradient(145deg, #2b1622, #4a2033);
+  border: 2px solid var(--pink);
+}
+.anime-avatar.reze {
+  background: linear-gradient(145deg, #181528, #2e2247);
+  border: 2px solid var(--purple);
+  animation-delay: -2s;
+}
+.anime-avatar svg { width: 85%; height: 85%; }
+.char-name {
+  position: absolute; bottom: -24px; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.15em; font-weight: 700; color: var(--cream);
+}
+@keyframes floatAvatar {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
 
 .quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 2.3rem); font-style: italic; line-height: 1.4; color: #ffe6f0; max-width: 680px; margin: 25px auto; }
 .quote span { color: var(--pink); }
@@ -147,13 +163,33 @@ footer { position: relative; z-index: 2; padding: 20px; text-align: center; colo
 </header>
 
 <main>
-  <!-- Səhnə 0 -->
+  <!-- Səhnə 0: Giriş -->
   <section class="scene active" data-scene="0">
     <div class="content">
       <div class="eyebrow">Bizim Balaca Kainatımız</div>
-      <div class="char-container">
-        <div class="char-badge denji"><span>🪚</span><small>Denji</small></div>
-        <div class="char-badge reze"><span>💣</span><small>Reze</small></div>
+      <div class="characters-stage">
+        <!-- Denji SVG (Blonde hair, sharp eyes) -->
+        <div class="anime-avatar denji">
+          <svg viewBox="0 0 100 100">
+            <path d="M30 35 Q50 10 70 35 Q85 55 70 80 Q50 90 30 80 Q15 55 30 35Z" fill="#e8c252"/>
+            <path d="M40 38 L50 50 L60 38Z" fill="#ff85b3"/>
+            <circle cx="42" cy="48" r="4" fill="#1b111c"/>
+            <circle cx="58" cy="48" r="4" fill="#1b111c"/>
+            <path d="M44 65 Q50 72 56 65" stroke="#1b111c" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="char-name">Denji</span>
+        </div>
+        <!-- Reze SVG (Dark hair, choker, cute expression) -->
+        <div class="anime-avatar reze">
+          <svg viewBox="0 0 100 100">
+            <path d="M25 35 Q50 15 75 35 Q82 60 70 82 Q50 92 30 82 Q18 60 25 35Z" fill="#36294a"/>
+            <circle cx="42" cy="48" r="4" fill="#fff"/>
+            <circle cx="58" cy="48" r="4" fill="#fff"/>
+            <rect x="38" y="70" width="24" height="5" rx="2.5" fill="#ff85b3"/>
+            <path d="M44 64 Q50 70 56 64" stroke="#ff85b3" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="char-name">Reze</span>
+        </div>
       </div>
       <h1>Somewhere<br>between <em>us.</em></h1>
       <p class="lead">Yağışlı gecənin fonunda, bütün fırtınalara rəğmən bir-birini tapan iki qəlb…</p>
@@ -162,12 +198,18 @@ footer { position: relative; z-index: 2; padding: 20px; text-align: center; colo
     </div>
   </section>
 
-  <!-- Səhnə 1 -->
+  <!-- Səhnə 1: Denji -->
   <section class="scene" data-scene="1">
     <div class="content">
       <div class="eyebrow">Hissə 01 · Denji</div>
-      <div class="char-container">
-        <div class="char-badge denji"><span>🪚</span><small>Denji</small></div>
+      <div class="characters-stage">
+        <div class="anime-avatar denji" style="transform: scale(1.1);">
+          <svg viewBox="0 0 100 100">
+            <path d="M30 35 Q50 10 70 35 Q85 55 70 80 Q50 90 30 80 Q15 55 30 35Z" fill="#e8c252"/>
+            <circle cx="42" cy="48" r="4" fill="#1b111c"/><circle cx="58" cy="48" r="4" fill="#1b111c"/>
+          </svg>
+          <span class="char-name">Denji</span>
+        </div>
       </div>
       <h2>Denji.</h2>
       <p class="lead">O, böyük xəyallar qurmurdu. Sadəcə səmimi bir gülüş, yanında rahat olacağı biri və tək olmadığını hiss edəcəyi isti bir liman istəyirdi…</p>
@@ -177,28 +219,41 @@ footer { position: relative; z-index: 2; padding: 20px; text-align: center; colo
     </div>
   </section>
 
-  <!-- Səhnə 2 -->
+  <!-- Səhnə 2: Reze -->
   <section class="scene" data-scene="2">
     <div class="content">
       <div class="eyebrow">Hissə 02 · Reze</div>
-      <div class="char-container">
-        <div class="char-badge reze"><span>💣</span><small>Reze</small></div>
+      <div class="characters-stage">
+        <div class="anime-avatar reze" style="transform: scale(1.1);">
+          <svg viewBox="0 0 100 100">
+            <path d="M25 35 Q50 15 75 35 Q82 60 70 82 Q50 92 30 82 Q18 60 25 35Z" fill="#36294a"/>
+            <circle cx="42" cy="48" r="4" fill="#fff"/><circle cx="58" cy="48" r="4" fill="#fff"/>
+            <rect x="38" y="70" width="24" height="5" rx="2.5" fill="#ff85b3"/>
+          </svg>
+          <span class="char-name">Reze</span>
+        </div>
       </div>
       <h2>Reze.</h2>
-      <p class="lead">Gözlərində dərin bir sirr, gülüşündü isə fırtına vardı. Amma həmin yağışlı gecədə bütün dünyadan qaçıb sığınmaq istədiyi tək yer vardı.</p>
+      <p class="lead">Gözlərində dərin bir sirr, gülüşündə isə fırtına vardı. Amma həmin yağışlı gecədə bütün dünyadan qaçıb sığınmaq istədiyi tək yer vardı.</p>
       <div class="quote">“Bütün dünyadan qaçmalı olsaydım, <span>sırf səninlə qaçmaq üçün</span> edərdim bunu.”</div>
       <div class="cta-row"><button class="secondary prev">← Geri</button><button class="primary next">Bəs onlar birlikdə? →</button></div>
       <div class="dots"></div>
     </div>
   </section>
 
-  <!-- Səhnə 3 -->
+  <!-- Səhnə 3: İki Qəlb -->
   <section class="scene" data-scene="3">
     <div class="content">
       <div class="eyebrow">Hissə 03 · İki Qəlb</div>
-      <div class="char-container">
-        <div class="char-badge denji"><span>🖤</span><small>Denji</small></div>
-        <div class="char-badge reze"><span>💜</span><small>Reze</small></div>
+      <div class="characters-stage">
+        <div class="anime-avatar denji" style="transform: translateY(-5px);">
+          <svg viewBox="0 0 100 100"><path d="M30 35 Q50 10 70 35 Q85 55 70 80 Q50 90 30 80 Q15 55 30 35Z" fill="#e8c252"/></svg>
+          <span class="char-name">Denji</span>
+        </div>
+        <div class="anime-avatar reze" style="transform: translateY(5px);">
+          <svg viewBox="0 0 100 100"><path d="M25 35 Q50 15 75 35 Q82 60 70 82 Q50 92 30 82 Q18 60 25 35Z" fill="#36294a"/></svg>
+          <span class="char-name">Reze</span>
+        </div>
       </div>
       <h2>İki fərqli dəniz,<br><em>Tək bir sahil.</em></h2>
       <p class="lead">Denji və Reze… Onların hekayəsi bizə bircə şeyi öyrədir: Hər nə olursa olsun, çətin anlarda belə bir-birinin əlini buraxmamaq əsl sevgi deməkdir.</p>
@@ -211,7 +266,7 @@ footer { position: relative; z-index: 2; padding: 20px; text-align: center; colo
     </div>
   </section>
 
-  <!-- Səhnə 4 -->
+  <!-- Səhnə 4: Məktub -->
   <section class="scene" data-scene="4">
     <div class="content">
       <div class="eyebrow">Mənim Rezemə 🌸</div>
@@ -240,13 +295,13 @@ footer { position: relative; z-index: 2; padding: 20px; text-align: center; colo
   const progress = document.getElementById('progress');
   let current = 0, audioCtx = null, musicOn = false, melodyTimer = null, noteIndex = 0;
 
-  // Yağış damcılarının dinamik yaradılması
+  // Yağış damcılarının generasiyası
   const rain = document.getElementById('rain');
-  for (let i = 0; i < 55; i++) {
+  for (let i = 0; i < 65; i++) {
     const r = document.createElement('i');
     r.className = 'raindrop';
     r.style.left = Math.random() * 100 + '%';
-    r.style.animationDuration = (0.7 + Math.random() * 1.2) + 's';
+    r.style.animationDuration = (0.65 + Math.random() * 1.0) + 's';
     r.style.animationDelay = (-Math.random() * 2) + 's';
     rain.appendChild(r);
   }
@@ -279,7 +334,7 @@ footer { position: relative; z-index: 2; padding: 20px; text-align: center; colo
   buildDots();
   show(0);
 
-  // Arxa fon musiqisi (Web Audio Sintezator - Reze & Denji vibe)
+  // Arxa fon musiqisi (Web Audio Sintezator)
   const notes = [220.00, 246.94, 261.63, 329.63, 392.00, 329.63, 261.63, 246.94];
   function playNote(freq) {
     if (!audioCtx || !musicOn) return;
