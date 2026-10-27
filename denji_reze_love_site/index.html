@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b16">
+<title>Our Little Universe — Denji × Reze</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap');
+:root{--bg:#100b16;--cream:#fff2e8;--pink:#ff91b9;--lilac:#c7a3ff;--muted:#c9b9c8;--glass:rgba(27,17,34,.68)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:Manrope,system-ui,sans-serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--pink);outline-offset:4px}
+#ambient{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 15% 20%,rgba(101,53,115,.22),transparent 40%),radial-gradient(ellipse at 85% 70%,rgba(164,63,109,.14),transparent 42%),#100b16;transition:background 1.5s}
+#stars,.rain{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:0;animation:twinkle var(--d,3s) ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.08;transform:scale(.7)}50%{opacity:.8;transform:scale(1.5)}}
+.raindrop{position:absolute;top:-30px;width:1px;height:35px;background:linear-gradient(transparent,rgba(194,193,255,.25));animation:rainfall var(--d,1.2s) linear infinite;opacity:.6}
+@keyframes rainfall{to{transform:translate3d(35px,110vh,0)}}
+main,.topbar{position:relative;z-index:2}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,5vw,70px);border-bottom:1px solid #ffffff12}
+.brand{letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;color:#e7d8e8}
+.brand span{color:var(--pink)}
+.pill{border:1px solid #ffffff26;background:#ffffff08;color:var(--cream);border-radius:999px;padding:10px 15px;font-size:.8rem;transition:.25s}
+.pill:hover{background:#ffffff16;border-color:#ffffff55}
+.scene{min-height:calc(100svh - 72px);padding:64px 22px;display:none;align-items:center;justify-content:center;position:relative}
+.scene.active{display:flex;animation:sceneIn 1s both}
+@keyframes sceneIn{from{opacity:0;filter:blur(8px);transform:translateY(12px)}to{opacity:1;filter:blur(0);transform:none}}
+.content{width:min(100%,900px);text-align:center;margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.34em;color:var(--pink);font-size:.7rem;font-weight:700;margin-bottom:20px}
+h1,h2,.letter{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500}
+h1{font-size:clamp(3.3rem,9vw,7.5rem);line-height:.9;letter-spacing:-.045em;margin:0 auto 24px}
+h1 em{color:var(--pink);font-weight:400}
+h2{font-size:clamp(2.5rem,6vw,5rem);line-height:1;margin:0 0 18px}
+.lead{color:var(--muted);font-size:clamp(.98rem,2.2vw,1.12rem);line-height:1.85;max-width:590px;margin:0 auto 30px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.primary{border:0;border-radius:999px;padding:15px 23px;background:linear-gradient(115deg,#ff8cb9,#d4a4ff);color:#24111f;font-weight:800;box-shadow:0 10px 35px #ed76b52c;transition:transform .25s,box-shadow .25s}
+.primary:hover{transform:translateY(-3px);box-shadow:0 15px 40px #ed76b550}
+.secondary{border:1px solid #ffffff32;background:#ffffff08;color:var(--cream);border-radius:999px;padding:14px 21px}
+.secondary:hover{background:#ffffff16}
+.glyph{font-size:clamp(4rem,13vw,8rem);line-height:1;margin:12px 0 26px;filter:drop-shadow(0 0 35px #ed82c750);animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(2deg)}}
+.silhouettes{display:flex;justify-content:center;align-items:end;gap:clamp(15px,6vw,70px);height:180px;margin:10px auto 28px}
+.silhouette{width:105px;height:145px;position:relative;filter:drop-shadow(0 0 25px #f48ab955);animation:float 4s ease-in-out infinite}
+.silhouette.reze{animation-delay:-2s;filter:drop-shadow(0 0 25px #bd9bff55)}
+.silhouette:before{content:"";position:absolute;top:0;left:32px;width:42px;height:48px;border-radius:48% 48% 45% 45%;background:linear-gradient(145deg,#e9c3bc,#5e344d)}
+.silhouette:after{content:"";position:absolute;top:42px;left:15px;width:76px;height:102px;border-radius:35px 35px 8px 8px;background:linear-gradient(145deg,#5a263f,#1c1524);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
+.reze:before{background:linear-gradient(145deg,#e6c4b6,#8b4e86)}
+.reze:after{background:linear-gradient(145deg,#9a527e,#252036)}
+.orbit{width:min(78vw,460px);aspect-ratio:1;border:1px solid #f9a4d82a;border-radius:50%;margin:0 auto 22px;display:grid;place-items:center;position:relative}
+.orbit:before,.orbit:after{content:"";position:absolute;inset:10%;border:1px solid #c7a3ff25;border-radius:50%;animation:spin 30s linear infinite}
+.orbit:after{inset:22%;border-color:#ff91b926;animation-direction:reverse;animation-duration:23s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbit-core{position:relative;z-index:1}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:34px auto;max-width:700px}
+.card{border:1px solid #ffffff18;background:linear-gradient(145deg,#ffffff0b,#ffffff03);border-radius:24px;padding:25px 20px;text-align:left;backdrop-filter:blur(10px);transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-5px);border-color:#ff91b966}
+.card .emoji{font-size:2rem}
+.card h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;margin:12px 0 6px}
+.card p{color:var(--muted);line-height:1.75;font-size:.9rem;margin:0}
+.quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.7rem);line-height:1.35;max-width:720px;margin:30px auto;color:#ffe6f0}
+.quote span{color:var(--pink)}
+.letter-wrap{max-width:690px;margin:28px auto 0;text-align:left;border:1px solid #ffffff20;border-radius:26px;background:linear-gradient(140deg,#ffffff0b,#ffffff04);padding:clamp(24px,5vw,48px);box-shadow:0 25px 100px #0004}
+.letter{font-size:clamp(1.25rem,2.7vw,1.6rem);line-height:1.7;color:#fcebf3;white-space:pre-line}
+.letter .sign{display:block;text-align:right;color:var(--pink);margin-top:24px;font-style:italic}
+.edit-hint{font-size:.76rem;color:#b8a4b9;margin-top:18px;text-align:center}
+.progress{position:fixed;bottom:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--pink),var(--lilac));z-index:10;transition:width .7s}
+.dots{display:flex;justify-content:center;gap:9px;margin:28px auto 0}
+.dot{width:7px;height:7px;border-radius:50%;background:#ffffff30;transition:.3s}
+.dot.on{width:24px;border-radius:9px;background:var(--pink)}
+footer{padding:24px;text-align:center;color:#8f7c91;font-size:.72rem;letter-spacing:.08em}
+.hidden{display:none!important}
+@media(max-width:600px){.topbar{padding:17px}.scene{min-height:calc(100svh - 62px);padding:46px 18px}.cards{grid-template-columns:1fr}.card{padding:20px}.silhouettes{height:145px}.silhouette{transform:scale(.82);transform-origin:bottom}.letter-wrap{border-radius:20px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="ambient"></div><div id="stars" aria-hidden="true"></div><div class="rain" id="rain" aria-hidden="true"></div>
+<header class="topbar">
+  <div class="brand">DENJI <span>×</span> REZE</div>
+  <button class="pill" id="musicBtn" aria-label="Musiqini aç və ya söndür">♫ <span id="musicLabel">Musiqini aç</span></button>
+</header>
+<main>
+  <section class="scene active" data-scene="0">
+    <div class="content">
+      <div class="eyebrow">A little story, just for you</div>
+      <div class="orbit"><div class="orbit-core"><div class="glyph">🖤</div><div class="eyebrow">two souls · one little universe</div></div></div>
+      <h1>Somewhere<br>between <em>us.</em></h1>
+      <p class="lead">Bəzən ən gözəl hekayələr qaranlıqda başlayır… sonra bir nəfər gəlir və hər şeyi işıqlandırır.</p>
+      <div class="cta-row"><button class="primary next">Hekayəmizə başla ✦</button></div>
+      <div class="dots" aria-label="Səhnə göstəricisi"></div>
+    </div>
+  </section>
+  <section class="scene" data-scene="1">
+    <div class="content">
+      <div class="eyebrow">Chapter 01 · The boy</div>
+      <div class="silhouettes"><div class="silhouette"></div></div>
+      <h2>Denji.</h2>
+      <p class="lead">O, çox şey istəmirdi. Bir az istilik, yanında qalacaq biri və özünü tək hiss etmədiyi balaca bir dünya…</p>
+      <div class="quote">“Bəzən insanın istədiyi ən böyük şey, sadəcə <span>sevilməkdir.</span>”</div>
+      <div class="cta-row"><button class="secondary prev">← Geri</button><button class="primary next">Davam et →</button></div>
+      <div class="dots"></div>
+    </div>
+  </section>
+  <section class="scene" data-scene="2">
+    <div class="content">
+      <div class="eyebrow">Chapter 02 · The girl</div>
+      <div class="silhouettes"><div class="silhouette reze"></div></div>
+      <h2>Reze.</h2>
+      <p class="lead">Gülüşünün arxasında gizli bir dünya vardı. Amma bəzən bir insanın yanında özünü bir anlıq da olsa azad hiss edirsən.</p>
+      <div class="quote">“Bütün dünyadan qaçmaq istəsəm, bəlkə də <span>səninlə</span> qaçardım.”</div>
+      <div class="cta-row"><button class="secondary prev">← Geri</button><button class="primary next">Bəs onlar? →</button></div>
+      <div class="dots"></div>
+    </div>
+  </section>
+  <section class="scene" data-scene="3">
+    <div class="content">
+      <div class="eyebrow">Chapter 03 · A little closer</div>
+      <div class="silhouettes"><div class="silhouette"></div><div class="silhouette reze"></div></div>
+      <h2>Two hearts.<br><em>One chance.</em></h2>
+      <p class="lead">Denji və Reze… qüsursuz deyildilər. Hər şey asan da deyildi. Amma onların hekayəsi bizə bir şeyi xatırladır:</p>
+      <div class="cards">
+        <article class="card"><div class="emoji">🌙</div><h3>Denji</h3><p>Birinin onu həqiqətən görməsini, olduğu kimi qəbul etməsini istəyən oğlan.</p></article>
+        <article class="card"><div class="emoji">🌸</div><h3>Reze</h3><p>Qəlbində gizlətdikləri olsa da, birinə yaxınlaşmağın necə hiss olduğunu bilən qız.</p></article>
+      </div>
+      <div class="quote">Bəlkə də sevgi, <span>yanında özün ola bildiyin</span> insandır.</div>
+      <div class="cta-row"><button class="secondary prev">← Geri</button><button class="primary next">Sənə bir sözüm var… 💌</button></div>
+      <div class="dots"></div>
+    </div>
+  </section>
+  <section class="scene" data-scene="4">
+    <div class="content">
+      <div class="eyebrow">The last chapter · For you</div>
+      <h2>My favorite<br><em>person.</em></h2>
+      <div class="letter-wrap">
+        <div class="letter" id="letterText">Canım mənim,
+
+Bəzən sözlərlə içimdə olan hər şeyi anlatmaq çətin gəlir. Amma bunu bilməyini istəyirəm: həyatımda olduğun üçün çox xoşbəxtəm.
+
+Denji və Rezenin hekayəsini düşünəndə, mənə ən çox toxunan şey birlikdə yaşaya biləcəkləri adi, sakit bir həyat xəyal etmələridir. Mən də səninlə belə anlar istəyirəm — gülmək, boş şeylərdən danışmaq, çətin günlərdə bir-birimizə dayaq olmaq və balaca xatirələr toplamaq.
+
+Hər gün mükəmməl olmayacaq, amma sənə qarşı səmimi olmaq və səni dinləmək istəyirəm. Ümid edirəm, yanımda özünü dəyərli, rahat və sevilmiş hiss edərsən.
+
+Bu balaca saytın hər səhnəsi sənə bir şeyi xatırlatsın: sən mənim üçün xüsusisən. 💗<span class="sign">Həmişə sənə tərəf,<br>mənim adım ❤️</span></div>
+      </div>
+      <p class="edit-hint">Balaca qeyd: məktubu və “mənim adım” hissəsini HTML faylında özünüzə uyğun dəyişə bilərsiniz.</p>
+      <div class="cta-row"><button class="secondary prev">← Əvvələ qayıt</button><button class="primary" id="restart">Hekayəni yenidən yaşa ↻</button></div>
+      <div class="dots"></div>
+    </div>
+  </section>
+</main>
+<footer>MADE WITH ♡ · DENJI × REZE · YOUR LITTLE UNIVERSE</footer>
+<div class="progress" id="progress"></div>
+<script>
+(() => {
+ const scenes=[...document.querySelectorAll('.scene')], progress=document.getElementById('progress');
+ let current=0, autoTimer=null, audioCtx=null, musicOn=false, melodyTimer=null, noteIndex=0;
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ // Decorative stars and rain, generated locally (no external assets required).
+ const stars=document.getElementById('stars'), rain=document.getElementById('rain');
+ for(let i=0;i<95;i++){const s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.setProperty('--d',(2+Math.random()*5)+'s');s.style.animationDelay=(-Math.random()*5)+'s';stars.appendChild(s)}
+ for(let i=0;i<45;i++){const r=document.createElement('i');r.className='raindrop';r.style.left=Math.random()*100+'%';r.style.setProperty('--d',(.8+Math.random()*1.8)+'s');r.style.animationDelay=(-Math.random()*3)+'s';rain.appendChild(r)}
+ function buildDots(){scenes.forEach((scene,idx)=>{const holder=scene.querySelector('.dots');holder.innerHTML='';scenes.forEach((_,j)=>{const d=document.createElement('i');d.className='dot'+(idx===j?' on':'');holder.appendChild(d)})})}
+ function show(n){current=(n+scenes.length)%scenes.length;scenes.forEach((s,i)=>s.classList.toggle('active',i===current));progress.style.width=((current+1)/scenes.length*100)+'%';document.getElementById('ambient').style.background=current===0?'radial-gradient(ellipse at 15% 20%,rgba(101,53,115,.22),transparent 40%),radial-gradient(ellipse at 85% 70%,rgba(164,63,109,.14),transparent 42%),#100b16':current<3?'radial-gradient(ellipse at 50% 20%,rgba(84,47,101,.28),transparent 55%),#100b16':'radial-gradient(ellipse at 15% 20%,rgba(211,102,157,.24),transparent 42%),radial-gradient(ellipse at 85% 75%,rgba(131,88,180,.25),transparent 42%),#160d1b';window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});resetAuto()}
+ function resetAuto(){clearTimeout(autoTimer);if(!reduce&&current<scenes.length-1)autoTimer=setTimeout(()=>show(current+1),18000)}
+ document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(current+1)));
+ document.querySelectorAll('.prev').forEach(b=>b.addEventListener('click',()=>show(current-1)));
+ document.getElementById('restart').addEventListener('click',()=>show(0));
+ buildDots();show(0);
+ // Gentle original ambient tones made with Web Audio; no copyrighted song is bundled.
+ const notes=[261.63,329.63,392,329.63,293.66,349.23,440,349.23,261.63,329.63,392,493.88,440,392,329.63,293.66];
+ function playNote(freq,duration=.8){if(!audioCtx||!musicOn)return;const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.setValueAtTime(.0001,audioCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.045,audioCtx.currentTime+.08);gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);osc.connect(gain);gain.connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+duration+.03)}
+ function startMelody(){clearInterval(melodyTimer);playNote(notes[noteIndex++%notes.length],1.1);melodyTimer=setInterval(()=>playNote(notes[noteIndex++%notes.length],1.1),760)}
+ function stopMelody(){clearInterval(melodyTimer);melodyTimer=null}
+ const musicBtn=document.getElementById('musicBtn'),musicLabel=document.getElementById('musicLabel');
+ musicBtn.addEventListener('click',async()=>{try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')await audioCtx.resume();musicOn=!musicOn;if(musicOn){startMelody();musicLabel.textContent='Musiqini söndür';musicBtn.firstChild.textContent='♫ '}else{stopMelody();musicLabel.textContent='Musiqini aç';musicBtn.firstChild.textContent='♫ '}}catch(e){musicLabel.textContent='Audio dəstəklənmir'}});
+ // Space/arrow navigation, while avoiding interference with buttons.
+ document.addEventListener('keydown',e=>{if(e.target.matches('button,input,textarea'))return;if(e.key==='ArrowRight')show(current+1);if(e.key==='ArrowLeft')show(current-1)});
+})();
+</script>
+</body>
+</html>
